@@ -60,10 +60,10 @@ router.post('/', ({ body }, res) => {
         ...body
     })
     .then(dbUserData => {
-        req.session.save(() => {
-          req.session.user_id = dbUserData.id;
-          req.session.username = dbUserData.username;
-          req.session.loggedIn = true;
+        body.session.save(() => {
+          body.session.user_id = dbUserData.id;
+          body.session.username = dbUserData.username;
+          body.session.loggedIn = true;
     
           res.json(dbUserData);
         });

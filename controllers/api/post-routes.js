@@ -120,6 +120,17 @@ router.put('/:id', (req, res) => {
         });
 });
 
+router.put('/upvote', (req, res)=> {
+    if (req.session) {
+        Post.upvote({...req.body, user_id: req.session.user_id}, {Vote, Comment, User})
+        .then(updatedVoteData => res.json(updatedVoteData))
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        })
+    }
+})
+
 router.delete('/:id', (req, res) => {
     Post.destroy(
         {
